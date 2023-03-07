@@ -70,8 +70,7 @@ public class calculadora2 extends Application {
                 if (arr2[i] == 0) {
 
 
-                        ///String persona = new String();
-                        //String New_objeto = persona + Integer.toString(i);
+
                         if ((text_nombre.getText().length() == 0) || (text_edad.getText().length() == 0) || (list_provin.getValue() == null)) {
                             System.out.println("ERROR");
                         }
@@ -127,11 +126,8 @@ public class calculadora2 extends Application {
             int op1 = arr_p[opcion_per1.getItems().indexOf(opcion_per1.getValue())];
             int op2 = arr_p[opcion_per2.getItems().indexOf(opcion_per2.getValue())];
 
-            // Creo una instancia del modelo
-            Operaciones o = new Operaciones(op1, op2);
-
             // Realizo la suma
-            int resultado = o.plus();
+            int resultado = op1 + op2;
 
             text_result.setText(resultado + "");
 
@@ -141,11 +137,8 @@ public class calculadora2 extends Application {
                     int op1 = arr_p[opcion_per1.getItems().indexOf(opcion_per1.getValue())];
                     int op2 = arr_p[opcion_per2.getItems().indexOf(opcion_per2.getValue())];
 
-                    // Creo una instancia del modelo
-                    Operaciones o = new Operaciones(op1, op2);
-
                     // Realizo la resta
-                    int resultado = o.minus();
+                    int resultado = op1 - op2;
 
                     text_result.setText(resultado + "");
 
@@ -156,11 +149,8 @@ public class calculadora2 extends Application {
                     int op1 = arr_p[opcion_per1.getItems().indexOf(opcion_per1.getValue())];
                     int op2 = arr_p[opcion_per2.getItems().indexOf(opcion_per2.getValue())];
 
-                    // Creo una instancia del modelo
-                    Operaciones o = new Operaciones(op1, op2);
-
                     // Realizo la multiplicación
-                    int resultado = o.mult();
+                    int resultado = op1 * op2;
 
                     text_result.setText(resultado + "");
 
@@ -170,11 +160,8 @@ public class calculadora2 extends Application {
                     int op1 = arr_p[opcion_per1.getItems().indexOf(opcion_per1.getValue())];
                     int op2 = arr_p[opcion_per2.getItems().indexOf(opcion_per2.getValue())];
 
-                    // Creo una instancia del modelo
-                    Operaciones o = new Operaciones(op1, op2);
-
                     // Realizo la división
-                    double resultado = o.division();
+                    double resultado = op1/op2;
 
                     text_result.setText(resultado + "");
         });
