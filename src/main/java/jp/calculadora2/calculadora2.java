@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 public class calculadora2 extends Application {
+    //Creamos una variable temp que nos servira como contador a la hora de guardar los nombres de las personas
     private int temp = 0;
 
 
@@ -47,21 +48,22 @@ public class calculadora2 extends Application {
         ComboBox opcion_per1 = new ComboBox();
 
         ComboBox opcion_per2 = new ComboBox();
-        //Contador
-        int tmp = 0;
+
 
         //Se crean los textfields
         TextField text_nombre = new TextField();
         TextField text_edad = new TextField();
 
 
-        //Se hace una función para adquirir los datos ingresados por los usuarios
+        //Se hace un array que almacene los objetos personas ingresados por el usuario
         Persona[] arr;
         arr = new Persona[4];
+        //Se crea un segundo Array donde vamos a ir contabilizando las personas ingresadas para que luego sean agregadas al Array arr
         int[] arr2 = {0,0,0,0};
+        //En este  Array vamos a almacenar las edades de los objetos persona y así poder operar con ellos mas adelante
         int [] arr_p;
         arr_p = new int[4];
-        //Acción del botón
+        //Acción del botón plus_Persona, donde se debe agregar el objeto persona al ser presionado
         plus_Persona.setOnAction(actionEvent -> {
             //Se hace una función para almacenar los datos ingresados por el usuario
             for (int i = 0; i<4; i++){
@@ -70,35 +72,39 @@ public class calculadora2 extends Application {
                 if (arr2[i] == 0) {
 
 
-
-                        if ((text_nombre.getText().length() == 0) || (text_edad.getText().length() == 0) || (list_provin.getValue() == null)) {
+                    //Se hace este if para revisar si se esta seleccionando los tres valores(nombre,provincia y edad
+                    if ((text_nombre.getText().length() == 0) || (text_edad.getText().length() == 0) || (list_provin.getValue() == null)) {
                             System.out.println("ERROR");
+                    }
+                    else {
+                        //Creamos un nuevo objeto persona con los atributos de la clase persona, sacados de lo escrito por el usuario
+                        Persona New_objeto = new Persona();
+                        int edad = Integer.parseInt(text_edad.getText());
+                        String nombre1 = text_nombre.getText();
+                        Object Provincia = list_provin.getValue();
+                        //Convertimos el objeto provincia seleccionado en un String para que pueda ser almacenado, ya que al hacer el .set solo nos permite ingresar Strings
+                        String PROVINCIA = Provincia.toString();
+                        New_objeto.setProvincia(PROVINCIA);
+                        New_objeto.setEdad(edad);
+                        New_objeto.setNombre(nombre1);
+                        //Utilizamos este if para poder verificar si aparecen nombres similares, si es el caso poder diferenciarlos con numeros, en el orden de entrada al Array
+                        if (temp>=1){
+                            if(New_objeto.getNombre()==nombre1){
+                                    New_objeto.setNombre(nombre1 +" "+ temp+"");
+                            }
                         }
                         else {
-                            Persona New_objeto = new Persona();
-                            int edad = Integer.parseInt(text_edad.getText());
-                            String nombre1 = text_nombre.getText();
-                            Object Provincia = list_provin.getValue();
-                            String PROVINCIA = Provincia.toString();
-                            New_objeto.setProvincia(PROVINCIA);
-                            New_objeto.setEdad(edad);
                             New_objeto.setNombre(nombre1);
-                            if (temp>=1){
-                                if(New_objeto.getNombre()==nombre1){
-                                    New_objeto.setNombre(nombre1 +" #"+ temp+"");
-                                }
-                            }
-                            else {
-                                New_objeto.setNombre(nombre1);
-                            }
-                            arr2[i] = 1;
-                            arr_p[i] = New_objeto.getEdad();
-                            opcion_per1.getItems().add(New_objeto.getNombre());
-                            opcion_per2.getItems().add(New_objeto.getNombre());
-                            break;
-
-
-
+                        }
+                        //Aumentamos i
+                        arr2[i] = 1;
+                        //Asignamos en esa posición la edad del objeto persona ingresado en ese momento
+                        arr_p[i] = New_objeto.getEdad();
+                        //Agregamos a las comboBox de opciones los nombres de los objeto persona ingresados
+                        opcion_per1.getItems().add(New_objeto.getNombre());
+                        opcion_per2.getItems().add(New_objeto.getNombre());
+                        //Se utiliza un break para que no almanece en todos los espacios el mismo objeto persona
+                        break;
 
                         }
 
@@ -106,22 +112,8 @@ public class calculadora2 extends Application {
 
             }
         });
-        opcion_per1.setOnAction(actionEvent -> {
 
-            String Persona = opcion_per1.getPromptText();
-            for(int i = 0; i<4; i++){
-
-                Object x = arr_p[i];
-                if (Persona == x){
-
-
-                }
-
-
-            }
-
-        });
-        //Metodo donde se sumaran las edades de las personas selecionadas
+        //Acción del botón donde se sumaran las edades de las personas selecionadas
         plus.setOnAction(actionEvent -> {
             int op1 = arr_p[opcion_per1.getItems().indexOf(opcion_per1.getValue())];
             int op2 = arr_p[opcion_per2.getItems().indexOf(opcion_per2.getValue())];
@@ -132,7 +124,7 @@ public class calculadora2 extends Application {
             text_result.setText(resultado + "");
 
         });
-        //Metodo donde se restaran las edades de las personas selecionadas
+        //Acción del botón donde se restaran las edades de las personas selecionadas
         minus.setOnAction(actionEvent -> {
                     int op1 = arr_p[opcion_per1.getItems().indexOf(opcion_per1.getValue())];
                     int op2 = arr_p[opcion_per2.getItems().indexOf(opcion_per2.getValue())];
@@ -144,7 +136,7 @@ public class calculadora2 extends Application {
 
         });
 
-        //Metodo donde se multipilicar las edades de las personas selecionadas
+        //Acción del botón donde se multipilicar las edades de las personas selecionadas
         multiply.setOnAction(actionEvent -> {
                     int op1 = arr_p[opcion_per1.getItems().indexOf(opcion_per1.getValue())];
                     int op2 = arr_p[opcion_per2.getItems().indexOf(opcion_per2.getValue())];
@@ -155,7 +147,7 @@ public class calculadora2 extends Application {
                     text_result.setText(resultado + "");
 
         });
-        //Metodo donde se dividiran las edades de las personas selecionadas
+        //Acción del botón donde se dividiran las edades de las personas selecionadas
         divide.setOnAction(actionEvent -> {
                     int op1 = arr_p[opcion_per1.getItems().indexOf(opcion_per1.getValue())];
                     int op2 = arr_p[opcion_per2.getItems().indexOf(opcion_per2.getValue())];
@@ -169,7 +161,7 @@ public class calculadora2 extends Application {
 
 
 
-        //Posiciones de todos los labels y botones
+        //Posiciones de todos los labels, botones, textFields y ComboBox
 
         resultadol.setLayoutX(170);
         resultadol.setLayoutY(20);
@@ -228,7 +220,7 @@ public class calculadora2 extends Application {
         divide.setLayoutX(375);
         divide.setLayoutY(240);
 
-        //Aumento de los tamaños de los labels y botones
+        //Aumento de los tamaños de los labels, botones, textField y comboBox
         text_result.setStyle("-fx-font-size: 1.3em; ");
         resultadol.setStyle("-fx-font-size: 1.5em; ");
         agre_persona.setStyle("-fx-font-size: 1.3em; ");
@@ -259,6 +251,7 @@ public class calculadora2 extends Application {
 
 
 
+        //Tamaño de la pantalla para la calculadora
         Scene scene = new Scene(root, 500, 450);
 
 
