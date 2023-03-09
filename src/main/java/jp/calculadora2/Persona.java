@@ -1,8 +1,19 @@
 package jp.calculadora2;
 
-
+/**
+ * Objeto Persona
+ * Objeto con atributos como nombre, provincias y edad
+ * author Jose Pablo Guerrero
+ * version 1.0 2023/03/08
+ */
 public class Persona {
     //Atributos de la persona,  en este caso nombre, provincia y edad
+    /**
+     * Atributos del objeto Persona
+     * Creamos los atributos que necesitaremos identificar de parte de los usuarios
+     * Valores validos: Strings para provincia y nombre e int para edad
+     *
+     */
     private String nombre;
     private  String provincia;
     private int edad;

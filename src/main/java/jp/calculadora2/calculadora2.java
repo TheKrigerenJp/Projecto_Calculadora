@@ -9,8 +9,20 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+/**
+ * Main de la calculadora
+ * En esta clase haré todo lo grafico y operacional
+ * author Jose Pablo Guerrero
+ * version 0.1 2023/03/08
+ */
 public class calculadora2 extends Application {
-    //Creamos una variable temp que nos servira como contador a la hora de guardar los nombres de las personas
+    /**
+     * Variable temporal
+     * Se utilizara como contador global
+     * Enteros
+     * Empieza en 0
+     */
     private int temp = 0;
 
 
